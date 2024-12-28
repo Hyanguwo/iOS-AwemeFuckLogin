@@ -3,9 +3,10 @@ ARCHS = arm64 arm64e
 
 include $(THEOS)/makefiles/common.mk
 
-TWEAK_NAME = BlockUIAlertController
+TWEAK_NAME = AwemeFuckLogin
 
-BlockUIAlertController_FILES = Tweak.xm
-BlockUIAlertController_FRAMEWORKS = UIKit
+AwemeFuckLogin_FILES = Tweak.xm
+AwemeFuckLogin_FRAMEWORKS = UIKit
+AwemeFuckLogin_PLIST_FILES = AwemeFuckLogin.plist
 
 include $(THEOS_MAKE_PATH)/tweak.mk
