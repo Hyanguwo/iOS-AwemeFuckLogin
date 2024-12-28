@@ -1,0 +1,38 @@
+name: Build Tweak
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Theos
+      run: |
+        sudo apt update
+        sudo apt install -y perl clang ldid dpkg git wget curl zip unzip make
+        git clone --recursive https://github.com/theos/theos.git $HOME/theos
+        echo "export THEOS=$HOME/theos" >> $HOME/.bashrc
+        source $HOME/.bashrc
+
+    - name: Build .deb
+      env:
+        THEOS: $HOME/theos
+      run: |
+        make clean
+        make package
+
+    - name: Upload .deb
+      uses: actions/upload-artifact@v3
+      with:
+        name: AwemeFuckLogin
+        path: ./packages/*.deb
